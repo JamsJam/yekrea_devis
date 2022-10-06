@@ -19,10 +19,10 @@
 
     <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="#!">Feeling Guadeloupe </a>
-               <?php if(!isset($_SESSION["num_devis"])){
+                <a class="navbar-brand" href="index.php">Feeling Guadeloupe </a>
+               <?php if(!isset($_SESSION["admin"])){
    ?>  
-                <a class="btn btn-primary" href="index.php?useCase=admin">Administrateur</a>
+                <a class="btn btn-primary" href="index.php?useCase=login">Administrateur</a>
 
    <?php
                 }else{ ?>

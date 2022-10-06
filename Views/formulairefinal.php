@@ -240,7 +240,17 @@ if(!isset($_SESSION["id_devis"])){
       <?php include ('Views/modal.php') ?>
 
       <?php if($confirmation == 0){ ?>
-      <button onclick="window.location.href = 'index.php?useCase=devis&action=confirmation'" name="submit" class="btn btn-outline-success">Envoyez les informations</button></div><br>
+        <div>
+          <div>
+            <input type="checkbox"  id="conditionGeneral">
+            <label for="conditionGeneral">Je declare avoir pris connaissance des <a href="#">Conditions generales de vente</a></label>
+          </div>
+          <div>
+            <input type="checkbox" id="revisionFormulaire">
+            <label for="revisionFormulaire">Je certifie l’exactitude de tous les renseignements portés sur le devis n°<?php echo $_SESSION['numDevis'] ?></label>
+          </div>
+        </div>
+      <button onclick="window.location.href = 'index.php?useCase=devis&action=confirmation'" name="submit" class="btn btn-outline-success" id="confirmation" disabled>Envoyez les informations</button></div><br>
       <?php } ?>
 
     <?php }else{ ?>
@@ -301,7 +311,24 @@ if(!isset($_SESSION["id_devis"])){
     </div><br>
 
     <?php } ?>
-  
+    <script>
+      let checkRevision = document.querySelector('#revisionFormulaire') 
+      let checkCGU = document.querySelector('#conditionGeneral') 
+      let btnConfirm = document.querySelector('#confirmation')
+
+      checkRevision.addEventListener('change',areChecked)
+
+      function areChecked(){
+        if (checkRevision.checked == true && checkCGU.checked == true)
+        {
+          btnConfirm.removeAttribute('disabled');
+        }
+        else
+        {
+          btnConfirm.setAttribute('disabled', '');
+        }
+      }
+    </script>
 <?php
 include_once('footer.php');
 ?>

@@ -57,4 +57,17 @@ function insertTarif($numdevis, $nba, $tarifa, $nbe, $tarife)
     $count = $stmt->execute();
     return $count;
 }
+// Fonction qui recupere toout les devis avec les clients associé
+function getAllDevis(){
+    global $database;
+    $query = "SELECT d.*, c.*  
+                FROM devis d
+                JOIN client c
+                ON d.id_client = c.id_client
+                ORDER BY id_devis DESC";
+    $req = $database->prepare($query);
+    $req->execute();
+    $ligne = $req->fetchAll(PDO::FETCH_ASSOC);
+    return $ligne;
+}
 

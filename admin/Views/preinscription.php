@@ -1,7 +1,8 @@
 <?php
-include_once('header.php');
-?>
 
+include_once('header.php');
+
+?>
 <body>
     <div>
         <div class="container">

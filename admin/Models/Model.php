@@ -1,8 +1,8 @@
 <?php
-define('DB_NAME', 'feelingguadeloupe_frdevis');
-define('DB_SERVER', 'feelingguadeloupe.fr.mysql');
-define('DB_USER', 'feelingguadeloupe_frdevis');
-define('DB_PASSWORD', 'CR97120@@');
+define('DB_NAME', 'feelingguadeloupe');
+define('DB_SERVER', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
 
 function connect()
 {
