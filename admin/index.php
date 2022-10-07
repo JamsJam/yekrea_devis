@@ -25,9 +25,6 @@ else {
                 include('Controllers\adminDashboardController.php');
                 break;
 
-            case 'mail':
-                include('Controllers/adminController.php');
-                break;
 
             case 'deconnexion':
                 unset($_SESSION['id_devis']);
