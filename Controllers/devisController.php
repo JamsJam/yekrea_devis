@@ -189,13 +189,21 @@ if (isset($_REQUEST['action'])) {
             $compagniea = $_REQUEST['compagniea'];
             $contrata = $_REQUEST['contrata'];
             $tela = $_REQUEST['tela'];
-            $assuranceA = $_REQUEST['assuranceA'];
-                if($assuranceA == NULL){
-                $assuranceA = '0'; 
+            if(isset($_REQUEST['assuranceA'])){
+
+                $assuranceA = $_REQUEST['assuranceA'];
+            }
+            else
+            {
+                $assuranceA = '0';
             }
 
-            $assuranceB = $_REQUEST['assuranceB'];
-                if($assuranceB == NULL){
+            if (isset($_REQUEST['assuranceB'])) {
+                
+                $assuranceB = $_REQUEST['assuranceB'];
+            }
+            else
+            {
                 $assuranceB = '0'; 
             }
 
@@ -212,12 +220,16 @@ if (isset($_REQUEST['action'])) {
             $provenance = $_REQUEST['provenance'];
             $heurearrivee = $_REQUEST['heurearrivee'];
             $aeroportarrivee = $_REQUEST['aeroportarrivee'];
-            $aller = $_REQUEST['aller'];
-            if($aller == NULL){
+
+            if (isset($_REQUEST['aller'])) {
+                $aller = $_REQUEST['aller'];
+            } else {
                 $aller = '1'; 
             }
-            $retour = $_REQUEST['retour'];
-            if($retour == NULL){
+
+            if (isset($_REQUEST['retour'])) {
+                $retour = $_REQUEST['retour'];
+            } else {
                 $retour = '0'; 
             }
 
@@ -234,13 +246,15 @@ if (isset($_REQUEST['action'])) {
             $provenance = $_REQUEST['provenance'];
             $heurearrivee = $_REQUEST['heurearrivee'];
             $aeroportarrivee = $_REQUEST['aeroportarrivee'];
-            $aller = $_REQUEST['aller'];
-            if($aller == NULL){
-                $aller = '0'; 
+            if (isset($_REQUEST['aller'])) {
+                $aller = $_REQUEST['aller'];
+            } else {
+                $aller = '1'; 
             }
-            $retour = $_REQUEST['retour'];
-            if($retour == NULL){
-                $retour = '1'; 
+            if (isset($_REQUEST['retour'])) {
+                $retour = $_REQUEST['retour'];
+            } else {
+                $retour = '0'; 
             }
             
             insertParticipantVol($id, $numvol, $date, $heure, $provenance, $heurearrivee,$aeroportarrivee, $aller, $retour); 
