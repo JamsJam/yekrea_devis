@@ -10,7 +10,7 @@ else {
         
         switch ($useCase) {
             case 'admin':
-                include('admin\Controllers\adminDashboardController.php');
+                include('Views\landing.php');
                 break;
                 
             case 'insertDevis':
@@ -20,10 +20,34 @@ else {
             case 'preinscription':
                 include('Views/preinscription.php');
                 break;
+                
+            case 'dash':
+                include('Controllers\adminDashboardController.php');
+                break;
+
+            case 'mail':
+                include('Controllers/adminController.php');
+                break;
+
+            case 'deconnexion':
+                unset($_SESSION['id_devis']);
+                unset($_SESSION['id_client']);
+                unset($_SESSION['nom']);
+                unset($_SESSION['prenom']);
+                unset($_SESSION['num_devis']);
+                unset($_SESSION['date_devis']);
+                unset($_SESSION['nba']);
+                unset( $_SESSION['tarifa']);
+                unset($_SESSION['nbe']);
+                unset($_SESSION['tarife']);
+                unset($_SESSION['confirmation']);
+                unset($_SESSION["admin"]);
+                header('Location: ../index.php');
+                break;
 
         }
         
     } else {
-        include('Controllers\adminDashboardController.php');
+        include('Views\landing.php');
     }
 }

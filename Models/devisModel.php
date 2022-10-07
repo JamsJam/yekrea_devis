@@ -28,14 +28,6 @@ function getInfoDevis($db)
 {
     global $database;
     $query = "SELECT * FROM devis WHERE num_devis = '$db'";
-        // $query = "SELECT d.* 
-        //             FROM `devis` d
-        //             JOIN client c
-        //             ON d.id_client = c.id_client
-        //             WHERE 
-        //                 c.nom = '$db' 
-        //             OR
-        //                 d.num_devis = '$db'";
     $req = $database->prepare($query);
     $req->execute();
     $ligne = $req->fetch();
@@ -317,4 +309,18 @@ function supPersonne($id)
     $stmt = $database->prepare($query);
     $count = $stmt->execute();
     return $count;
+}
+function sendMail(){
+    require("Models/Mailer.php");
+    $mailer->isHTML(true);                                  
+    $mailer->Subject = 'Here is the subject';
+    $mailer->Body    = '
+    <p>Cher administrateur,</p>
+    <p>Un nouveau formulaire à été rempli.</p>
+    <p>Vous pouvez le consulter a  <a href="#"> cette adresse <a/></p>
+    
+    ';
+    $mailer->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mailer->addAddress('j.antoine971@hotmail.fr', 'Joe User');
+    $mailer->send();
 }

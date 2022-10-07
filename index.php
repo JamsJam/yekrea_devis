@@ -41,6 +41,10 @@ if (isset($_REQUEST['useCase'])) {
             unset($_SESSION["admin"]);
             header('Location: index.php');
             break;
+        
+        // case 'mail':
+        //     include('Controllers/mailerController.php');
+        //     break;
 
     }
     

@@ -6,54 +6,78 @@ if(isset($_SESSION['admin'])){
 }
 ?>
 
+<style>
 
-
-<div>
-<?php
-    if (isset($_REQUEST['loginfail'])) {
-        switch ($_REQUEST['loginfail']) {
-            case '1':
-                ?>
-                <div>
-                    <p class="text-danger">Veuillez entrer un identifiant et un mot de passe valide.</p>
-                </div>
-                <?php
-                break;
-            
-            case '2':
-                ?>
-                <div>
-                    <p class="text-danger">Votre mot de passe ou votre identifiant est incorrect. Veuiller réessayer.</p>
-                </div>
-                <?php
-                break;
-            
-            case '3':
-                ?>
-                <div>
-                    <p class="text-danger">Veuillez vous connecter.</p>
-                </div>
-                <?php
-                break;
-        }
+    #login__container{
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
+    #login__formContainer{
+        width: 80vw;
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .login__inputContainer{
+        width: 40vw;
+        min-width: 300px;
+        max-width: 600px;
+
+    }
+
+</style>
+
+<div id="login__container">
+    <?php
+        if (isset($_REQUEST['loginfail'])) {
+            switch ($_REQUEST['loginfail']) {
+                case '1':
+                    ?>
+                        <div class="text-center px-4">
+                            <p class="text-danger">Veuillez entrer un identifiant et un mot de passe valide.</p>
+                        </div>
+                    <?php
+                    break;
+                
+                case '2':
+                    ?>
+                        <div>
+                            <p class="text-danger">Votre mot de passe ou votre identifiant est incorrect. Veuiller réessayer.</p>
+                        </div>
+                    <?php
+                    break;
+                
+                case '3':
+                    ?>
+                        <div>
+                            <p class="text-danger">Veuillez vous connecter pour acceder a cette page.</p>
+                        </div>
+                    <?php
+                    break;
+            }
+        }
     ?>
 
     <form  method="POST">
-        <div>
+        <div id="login__formContainer">
 
-            <div>
-                <label for="Id">Identifiant</label>
-                <input type="text" name="id" id="id">
+            <div class="form-group login__inputContainer my-4 " >
+                <label for="id">Identifiant</label>
+                <input type="text" name="id" id="id" class="form-control">
             </div>
 
-            <div>
+            <div class="form-group login__inputContainer my-4 " >
                 <label for="password">Mot de passe</label>
-                <input type="password" name="password" id="password">
+                <input type="password" name="password" id="password" class="form-control">
             </div>
 
-            <div>
-                <input type="submit" formaction="index.php?useCase=connexion" value="Connexion">
+            <div class="form-group login__submit " >
+                <input type="submit" formaction="index.php?useCase=connexion" value="Connexion" class="form-control btn btn-success my-4">
             </div>
 
         </div>

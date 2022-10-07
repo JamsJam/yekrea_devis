@@ -4,20 +4,24 @@ include_once('header.php');
 
 ?>
 <style>
-
+  *{
+    box-sizing: border-box;
+  }
   #admin__dashTable,
   #admin__dashTable td,
   #admin__dashTable th
   {
     border: 1px solid black;
-
     text-align: center;
   }
-
+  #admin__dashTable td{
+    width: 100px;
+  }
   #admin__dashTable tr
   {
     height: 50px;
   }
+
  /*  Css Conditionnel */ 
 
     #admin__dashTable td.isDone{
@@ -45,13 +49,13 @@ include_once('header.php');
 </style>
     <div>
         <div class="container">
-      <h1>Formulaire  enregistré </h1>
+      <h1 class="text-center mt-4 mb-5">Formulaires  enregistrés </h1>
       <div class="row">
-        <table  class="col-12" id="admin__dashTable">
+        <table  class="col-10 mx-auto" id="admin__dashTable">
           <thead>
             <th>Nom</th>
             <th>Prenom</th>
-            <th>Formulaire n°</th>
+            <th>Devis n°</th>
             <th>Rempli</th>
             <th>Envoyé</th>
           </thead>
@@ -69,6 +73,7 @@ include_once('header.php');
 
 
               <td ><?php echo $element['num_devis'] ?></td>
+              <!-- CSS conditionnelle -->
               <td class=<?php echo ( $element['final'] ? "isDone" : "isNotDone") ; ?>>
                 <?php 
                     if($element['final']){
@@ -80,6 +85,7 @@ include_once('header.php');
                     }
                   ?>
               </td>
+              <!-- CSS conditionnelle -->
               <td class=<?php echo ( $element['confirmation'] ? "isDone" : "isNotDone") ; ?>>
                 <?php 
                     if($element['confirmation']){

@@ -243,11 +243,11 @@ if(!isset($_SESSION["id_devis"])){
         <div>
           <div>
             <input type="checkbox"  id="conditionGeneral">
-            <label for="conditionGeneral">Je declare avoir pris connaissance des <a href="#">Conditions generales de vente</a></label>
+            <label for="conditionGeneral">Je declare avoir pris connaissance des <a href="../index.php?" target="_blank">Conditions generales de vente</a></label>
           </div>
           <div>
             <input type="checkbox" id="revisionFormulaire">
-            <label for="revisionFormulaire">Je certifie l’exactitude de tous les renseignements portés sur le devis n°<?php echo $_SESSION['numDevis'] ?></label>
+            <label for="revisionFormulaire">Je certifie l’exactitude de tous les renseignements portés sur le devis n°<?php echo $_SESSION['num_devis'] ?></label>
           </div>
         </div>
       <button onclick="window.location.href = 'index.php?useCase=devis&action=confirmation'" name="submit" class="btn btn-outline-success" id="confirmation" disabled>Envoyez les informations</button></div><br>

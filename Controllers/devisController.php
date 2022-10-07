@@ -157,17 +157,24 @@ if (isset($_REQUEST['action'])) {
             $compagniea = $_REQUEST['compagniea'];
             $contrata = $_REQUEST['contrata'];
             $tela = $_REQUEST['tela'];
-            $assuranceA = $_REQUEST['assuranceA'];
-                if($assuranceA == NULL)
-                {
-                    $assuranceA = '0'; 
-                }
+            if(isset($_REQUEST['assuranceA'])){
 
-            $assuranceB = $_REQUEST['assuranceB'];
-                if($assuranceB == NULL)
-                {
-                    $assuranceB = '0'; 
-                }
+                $assuranceA = $_REQUEST['assuranceA'];
+            }
+            else
+            {
+                $assuranceA = '0';
+            }
+
+            if (isset($_REQUEST['assuranceB'])) {
+                
+                $assuranceB = $_REQUEST['assuranceB'];
+            }
+            else
+            {
+                $assuranceB = '0'; 
+            }
+
 
 
             include('Views/formulaire4.php');
@@ -241,6 +248,7 @@ if (isset($_REQUEST['action'])) {
             break;
                                                     
         case 'formulairefinal':
+            $db = $_SESSION['num_devis'];
             $info = getInfoDevis($db);
             $confirmation = $info['confirmation'];    
             $id = $_SESSION["id_devis"];
@@ -248,7 +256,9 @@ if (isset($_REQUEST['action'])) {
             $prenomd = $_REQUEST['prenomd'];
             $teld = $_REQUEST['teld'];
             insertParticipantAssistance($id, $nomd, $prenomd, $teld); 
-            updateDevisConfirmation($id); 
+            updateDevisConfirmation($id);
+            // Mailer
+            sendMail();
             include('Views/formulairefinal.php');
             break;
 
@@ -261,6 +271,8 @@ if (isset($_REQUEST['action'])) {
             $teld = $_REQUEST['teld'];
             insertParticipantAssistance($id, $nomd, $prenomd, $teld); 
             updateDevisConfirmation($id); 
+            // Mailer
+
             include('Views/formulaire6.php');
             break;     
             

@@ -30,6 +30,7 @@ include_once('header.php');
                         <div class="col mx-auto"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Entrer</button></div>
                     </div>
                 </form>
+                <a href="index.php?useCase=mail&action=mail"><button>Mail</button></a>
                 
                 
                 

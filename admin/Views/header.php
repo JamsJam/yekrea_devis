@@ -22,5 +22,12 @@ if(!isset($_SESSION['admin'])){
     <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="index.php">Feeling Guadeloupe</a>
-                <a class="btn btn-primary" href="index.php?useCase=preinscription">Formulaire de préinscription</a>
+                <?php if(isset($_SESSION["admin"]))
+                    {
+                ?>
+                    <a class="btn btn-outline-danger" href="index.php?useCase=deconnexion">Déconnexion</a>
+                <?php
+                    } 
+                ?>
+                
     </nav>
