@@ -34,8 +34,12 @@ if(isset($_SESSION['admin'])){
 
 <div id="login__container">
     <?php
+
+        // Si Requete(get) loginFail alors : tentative d'acces a une route securisée ou echec de connection,
+        // alors generation du message approprié en fonction de la situation
         if (isset($_REQUEST['loginfail'])) {
             switch ($_REQUEST['loginfail']) {
+                // identifiant ou mot de passe vide
                 case '1':
                     ?>
                         <div class="text-center px-4">
@@ -43,7 +47,7 @@ if(isset($_SESSION['admin'])){
                         </div>
                     <?php
                     break;
-                
+                //identifiant ou mot de passe incorrect 
                 case '2':
                     ?>
                         <div>
@@ -51,7 +55,7 @@ if(isset($_SESSION['admin'])){
                         </div>
                     <?php
                     break;
-                
+                // Acces a une route securisé sans connection
                 case '3':
                     ?>
                         <div>
