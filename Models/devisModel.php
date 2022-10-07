@@ -1,6 +1,8 @@
 <?php
+//connexion BDD
 require_once('Model.php');
 
+//Verifie si $bd est present dans la table num_devis
 function getNumDevis($db)
 {
     global $database;
@@ -11,6 +13,17 @@ function getNumDevis($db)
     return $ligne;
 }
 
+function getClientId($nom){
+
+    global $database;
+    $query = "SELECT id_client FROM client WHERE nom = '$nom'";
+    $req = $database->prepare($query);
+    $req->execute();
+    $ligne = $req->fetch();
+    return $ligne;
+}
+
+//Recupere les toutes les info d'un devis a partir d'un numero de devis, ou du nom du client
 function getInfoDevis($db)
 {
     global $database;
@@ -21,6 +34,46 @@ function getInfoDevis($db)
     return $ligne;
 }
 
+//Recupere les toutes les info d'un devis a partir d'un numero de devis, ou du nom du client
+function hasDevis($db, $nomDevis)
+{
+
+    global $database;
+    // query 1 -> verifie si le nom est bien en bdd
+    $query = "SELECT nom FROM client";
+    $req = $database->prepare($query);
+    $req->execute();
+    //PDO::FETCH_COLUMN -> retourne les valeur de la colone dans un tableau
+    $nomClient = $req->fetchAll(PDO::FETCH_COLUMN);
+
+    
+    
+    if(!in_array($nomDevis, $nomClient))
+    {
+        $ligne = null;
+        return $ligne;
+    }
+    else
+    {
+        
+        // $query 2 -> recupere le devis correspondant a ce nom ET au nb devis donnée
+        $query2 = "SELECT * 
+                    FROM devis d
+                    JOIN client c
+                    ON d.id_client = c.id_client
+                    WHERE 
+                        c.nom = '$nomDevis' 
+                    AND
+                        d.num_devis = '$db'";
+                    
+        $req2 = $database->prepare($query2);
+        $req2->execute();
+        $ligne = $req2->fetch();
+        return $ligne;
+    }
+
+}
+//Recupere les info client a partir de son id
 function getInfoClient($idclient)
 {
     global $database;
@@ -30,7 +83,7 @@ function getInfoClient($idclient)
     $ligne = $req->fetch();
     return $ligne;
 }
-
+//Recupere les info d'un voyage a partir de l'id du devis
 function getInfoVoyage($id_devis)
 {
     global $database;
@@ -41,7 +94,7 @@ function getInfoVoyage($id_devis)
     return $ligne;
 }
 
-
+// recupere le nombre de conducteur correspondant a un id de devis
 function getInfoVoyageCountConducteur($id_devis)
 {
     global $database;
@@ -51,7 +104,7 @@ function getInfoVoyageCountConducteur($id_devis)
     $ligne = $req->fetch();
     return $ligne;
 }
-
+//recupere toutes les information d'un voyage en fonction de l'id du voyage
 function getInfoVoyageID($id_voyage)
 {
     global $database;
@@ -61,7 +114,7 @@ function getInfoVoyageID($id_voyage)
     $ligne = $req->fetch();
     return $ligne;
 }
-
+//recupere toutes les informations d'un de l'assurance relative a un numero de devis
 function getInfoAssurance($id_devis)
 {
     global $database;
@@ -71,7 +124,7 @@ function getInfoAssurance($id_devis)
     $ligne = $req->fetchAll();
     return $ligne;
 }
-
+//recupere toutes les informations d'un vol relatif a un numero de devis
 function getInfoVol($id_devis)
 {
     global $database;
@@ -82,7 +135,7 @@ function getInfoVol($id_devis)
     return $ligne;
 }
 
-
+// recupere les information d'un vol a partir de son numero de vol
 function getInfoNumVol($numvol)
 {
     global $database;
@@ -93,7 +146,7 @@ function getInfoNumVol($numvol)
     return $ligne;
 }
 
-
+// recupere les information de l'assistance a partir de l'id du devis
 function getInfoAssistance($id_devis)
 {
     global $database;
@@ -103,7 +156,7 @@ function getInfoAssistance($id_devis)
     $ligne = $req->fetchAll();
     return $ligne;
 }
-
+// enregistre les information du formulaire ou recuperer en bdd dans des variable de session
 function devisIn($id, $nom, $prenom, $idclient, $numdevis, $datedevis, $nba, $tarifa, $nbe, $tarife, $confirmation)
 {
     $_SESSION['id_devis'] = $id;
@@ -118,13 +171,13 @@ function devisIn($id, $nom, $prenom, $idclient, $numdevis, $datedevis, $nba, $ta
     $_SESSION['tarife'] = $tarife;
     $_SESSION['confirmation'] = $confirmation;
 }
-
+// enregistre l'id d'un voyage dans une variable de session
 function voyageIn($id)
 {
     $_SESSION['id_voyage'] = $id;
 }
 
-
+//mise a jour des informations du client
 function updateClient($tel, $adresse, $mail)
 {
     global $database;
@@ -137,7 +190,7 @@ function updateClient($tel, $adresse, $mail)
     $count = $stmt->execute();
     return $count;
 }
-
+//
 function insertParticipantVoyage($nomv, $prenomv, $naissancev, $nationnalitev, $numpv,$conducteur)
 {
     global $database;
@@ -256,4 +309,18 @@ function supPersonne($id)
     $stmt = $database->prepare($query);
     $count = $stmt->execute();
     return $count;
+}
+function sendMail(){
+    require("Models/Mailer.php");
+    $mailer->isHTML(true);                                  
+    $mailer->Subject = 'Here is the subject';
+    $mailer->Body    = '
+    <p>Cher administrateur,</p>
+    <p>Un nouveau formulaire à été rempli.</p>
+    <p>Vous pouvez le consulter a  <a href="#"> cette adresse <a/></p>
+    
+    ';
+    $mailer->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mailer->addAddress('j.antoine971@hotmail.fr', 'Joe User');
+    $mailer->send();
 }

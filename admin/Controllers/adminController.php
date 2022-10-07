@@ -1,5 +1,6 @@
 <?php
 require_once('Models/adminModel.php');
+// require('Models/Mailer.php');
 
 if (isset($_REQUEST['action'])) {
     $action = $_REQUEST['action'];
@@ -26,8 +27,10 @@ if (isset($_REQUEST['action'])) {
 
             insertTarif($numdevis, $tarifa, $nba, $tarife, $nbe);
             
-            include('Views/dashboard.php');
+            header('Location:index.php?useCase=dash');
             
             break;
+            
+            
     }
 }

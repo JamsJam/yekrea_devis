@@ -12,13 +12,26 @@ include_once('header.php');
 
                 <form method="POST" class="form-subscribe" action="index.php?useCase=devis&action=devisInsert">
                     <div class="row">
-                        <div class="col">
-                            <input class="form-control form-control-lg" name="numdevis" type="text" placeholder="Numéro de devis"/><br>
-                            <p>    <?= /** @var TYPE_NAME $message */ $message; ?></p>
+                        <p class='text-light' style="backdrop-filter: blur(1px);">    
+                            <?php 
+                                if(isset($message)){
+                                    echo /** @var TYPE_NAME $message */ $message;
+                                }
+                            ?>
+                        </p>
+                        <div class="col-12">
+                            <input class="form-control form-control-lg" name="name" type="text" placeholder="Nom"/><br>
+                            
                         </div>
-                        <div class="col-auto"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Entrer</button></div>
+                        <div class="col-12">
+                            <input class="form-control form-control-lg" name="numdevis" type="text" placeholder="Numéro de devis"/><br>
+                            
+                        </div>
+                        <div class="col mx-auto"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Entrer</button></div>
                     </div>
                 </form>
+                
+                
                 
 
                 

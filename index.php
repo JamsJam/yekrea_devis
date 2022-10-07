@@ -17,6 +17,14 @@ if (isset($_REQUEST['useCase'])) {
             include('Controllers/devisController.php'); 
             break;
 
+        case 'login':
+            include('./Views/loginAdmin.php');
+            break;
+
+        case 'connexion':
+            include('./Controllers/loginController.php');
+            break;
+
 
         case 'deconnexion':
             unset($_SESSION['id_devis']);
@@ -30,8 +38,10 @@ if (isset($_REQUEST['useCase'])) {
             unset($_SESSION['nbe']);
             unset($_SESSION['tarife']);
             unset($_SESSION['confirmation']);
+            unset($_SESSION["admin"]);
             header('Location: index.php');
             break;
+
 
     }
     

@@ -1,3 +1,8 @@
+<?php
+if(!isset($_SESSION['admin'])){
+    header('location:../index.php?useCase=login&loginfail=3');
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -16,6 +21,13 @@
 
     <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="#">Feeling Guadeloupe</a>
-                <a class="btn btn-primary" href="index.php?useCase=preinscription">Formulaire de préinscription</a>
+                <a class="navbar-brand" href="index.php">Feeling Guadeloupe</a>
+                <?php if(isset($_SESSION["admin"]))
+                    {
+                ?>
+                    <a class="btn btn-outline-danger" href="index.php?useCase=deconnexion">Déconnexion</a>
+                <?php
+                    } 
+                ?>
+                
     </nav>
