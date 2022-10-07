@@ -4,6 +4,7 @@ include_once('header.php');
 
 <body>
     <div>
+        
         <div class="container">
 
         <h2 class="page-section-heading text-center text-uppercase">Formulaire de pré-inscription</h2><br><br>
